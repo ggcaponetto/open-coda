@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "npm run open-browser && http-server public -c-1 -p 8080",
+    "serve": "npm run open-browser && http-server --cors public -c-1 -p 8080",
     "open-browser": "open-cli http://localhost:8080",
     "build": "npm run webpack",
     "webpack": "npm run webpack-debug && npm run webpack-prod",
@@ -26,6 +26,8 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.0.1",
+    "@tensorflow/tfjs": "^1.7.1",
     "axios": "^0.19.2",
     "http-server": "^0.12.1",
     "qs": "^6.9.3",

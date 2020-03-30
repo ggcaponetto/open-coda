@@ -33,14 +33,16 @@
         };
       })()
       window.videoCapture = videoCapture;
+      async function run(){
+        await window.videoCapture.detect(window.document.querySelectorAll("img")[0]);
+      }
     </script>
 </head>
 <body>
 <h1>
     open-coda
 </h1>
-<!--
-<button onclick="window.videoCapture.init()">testVideoCapture</button>
--->
+<img src="img/cat.jpg" alt="cat"/>
+<button onclick="run()">run</button>
 </body>
 </html>
