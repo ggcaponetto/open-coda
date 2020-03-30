@@ -1,6 +1,6 @@
 import qs from "qs";
 import * as cocoSsd from "@tensorflow-models/coco-ssd/dist/coco-ssd";
-import './video-capture.css';
+import styles from './video-capture.module.css';
 
 const getCallbackName = () => {
   let scripts = Array.from(document.getElementsByTagName('script'));
@@ -79,7 +79,8 @@ const runCallback = () => {
     window[`${paths[0]}`] = {
       ...window[`${paths[0]}`],
       detect,
-      detectFromVideo
+      detectFromVideo,
+      styles
     }
     window[`${paths[0]}`][`${paths[1]}`]();
   }

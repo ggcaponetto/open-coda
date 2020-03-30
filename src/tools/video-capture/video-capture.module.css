@@ -1,0 +1,8 @@
+:local(.className) {
+    position: relative;
+}
+
+:local(.className) canvas,
+:local(.className) video{
+    position: absolute;
+}

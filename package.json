@@ -10,7 +10,7 @@
     "webpack": "npm run webpack-debug && npm run webpack-prod",
     "webpack-prod": "webpack --config webpack.config.js",
     "webpack-debug": "webpack --config webpack.config.debug.js",
-    "autobuild": "nodemon --watch src --exec npm run build",
+    "autobuild": "nodemon -e js,css --watch src --exec npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

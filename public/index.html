@@ -20,7 +20,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="dist/">
+    <link rel="stylesheet" href="dist/tools/video-capture/video-capture.css">
     <script async src="dist/tools/video-capture/video-capture.js?callback=videoCapture.init"></script>
     <!--<script async src="dist/tools/video-capture/video-capture.min.js?callback=videoCapture.init"></script>-->
     <script defer>
@@ -47,6 +47,7 @@
         let container = document.createElement('div');
         container.width = videoWidth;
         container.height = videoHeight;
+        container.className = window.videoCapture.styles.className;
         let canvas = document.createElement('canvas');
         canvas.width = videoWidth;
         canvas.height = videoHeight;
