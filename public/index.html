@@ -41,34 +41,33 @@
 
       async function runVideo () {
         // Prefer camera resolution nearest to 1280x720.
-        let videoWidth = 400;
-        let videoHeight = 400;
-
-        let container = document.createElement('div');
-        container.width = videoWidth;
-        container.height = videoHeight;
-        container.className = window.videoCapture.styles.className;
-        let canvas = document.createElement('canvas');
-        canvas.width = videoWidth;
-        canvas.height = videoHeight;
-        let video = document.createElement('video');
-        video.width = videoWidth;
-        video.height = videoHeight;
-
         let body = document.getElementsByTagName("body")[0];
-        container.appendChild(video);
-        container.appendChild(canvas);
-        body.appendChild(container);
-        let constraints = { audio: true, video: { width: 400, height: 400 } }
+        let constraints = { audio: true, video: true }
         navigator.mediaDevices.getUserMedia(constraints)
           .then(function (mediaStream) {
-            var video = document.querySelector('video')
-            var canvas = document.querySelector('canvas')
+            console.log("mediastream", mediaStream)
+            let deviceId = mediaStream.getVideoTracks()[0].getSettings().deviceId
+            let frameRate = mediaStream.getVideoTracks()[0].getSettings().frameRate
+            let height = mediaStream.getVideoTracks()[0].getSettings().height
+            let width = mediaStream.getVideoTracks()[0].getSettings().width
+            let container = document.createElement('div');
+            container.width = width;
+            container.height = height;
+            container.className = window.videoCapture.styles.className;
+            let canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            let video = document.createElement('video');
+            video.width = width;
+            video.height = height;
             video.srcObject = mediaStream
             video.onloadedmetadata = function (e) {
               video.play();
               window.videoCapture.detectFromVideo(video, canvas);
             }
+            container.appendChild(video);
+            container.appendChild(canvas);
+            body.appendChild(container);
           })
           .catch(function (err) {
             alert(err.message);
