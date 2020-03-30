@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -20,21 +20,57 @@
     <meta name="theme-color" content="#ffffff">
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="dist/">
     <script async src="dist/tools/video-capture/video-capture.js?callback=videoCapture.init"></script>
     <!--<script async src="dist/tools/video-capture/video-capture.min.js?callback=videoCapture.init"></script>-->
     <script defer>
-      console.log("script tag executing...", window);
-      let videoCapture = (function(){
+      console.log('script tag executing...', window)
+      let videoCapture = (function () {
         const init = () => {
-          console.log("videoCapture - init", window);
+          console.log('videoCapture - init', window)
         }
         return {
           init
-        };
+        }
       })()
-      window.videoCapture = videoCapture;
-      async function run(){
-        await window.videoCapture.detect(window.document.querySelectorAll("img")[0]);
+      window.videoCapture = videoCapture
+
+      async function run () {
+        await window.videoCapture.detect(window.document.querySelectorAll('img')[0])
+      }
+
+      async function runVideo () {
+        // Prefer camera resolution nearest to 1280x720.
+        let videoWidth = 400;
+        let videoHeight = 400;
+
+        let container = document.createElement('div');
+        container.width = videoWidth;
+        container.height = videoHeight;
+        let canvas = document.createElement('canvas');
+        canvas.width = videoWidth;
+        canvas.height = videoHeight;
+        let video = document.createElement('video');
+        video.width = videoWidth;
+        video.height = videoHeight;
+
+        let body = document.getElementsByTagName("body")[0];
+        container.appendChild(video);
+        container.appendChild(canvas);
+        body.appendChild(container);
+
+        let constraints = { audio: true, video: { width: 400, height: 400 } }
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(function (mediaStream) {
+            var video = document.querySelector('video')
+            var canvas = document.querySelector('canvas')
+            video.srcObject = mediaStream
+            video.onloadedmetadata = function (e) {
+              video.play();
+              window.videoCapture.detectFromVideo(video, canvas);
+            }
+          })
+          .catch(function (err) { console.error(err.name + ': ' + err.message) }) // always check for errors at the end.
       }
     </script>
 </head>
@@ -42,7 +78,9 @@
 <h1>
     open-coda
 </h1>
+<!--
 <img src="img/cat.jpg" alt="cat"/>
-<button onclick="run()">run</button>
+-->
+<button onclick="runVideo()">run</button>
 </body>
 </html>
