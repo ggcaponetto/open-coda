@@ -19,10 +19,13 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <link rel="stylesheet" href="dist/tools/video-capture/video-capture.css">
+<!--
     <script async src="dist/tools/video-capture/video-capture.js?callback=videoCapture.init"></script>
-    <!--<script async src="dist/tools/video-capture/video-capture.min.js?callback=videoCapture.init"></script>-->
+-->
+    <script async src="dist/tools/video-capture/video-capture.min.js?callback=videoCapture.init"></script>
     <script defer>
       console.log('script tag executing...', window)
       let videoCapture = (function () {
@@ -42,7 +45,7 @@
       async function runVideo () {
         // Prefer camera resolution nearest to 1280x720.
         let body = document.getElementsByTagName("body")[0];
-        let constraints = { audio: true, video: true }
+        let constraints = { audio: false, video: true }
         navigator.mediaDevices.getUserMedia(constraints)
           .then(function (mediaStream) {
             console.log("mediastream", mediaStream)
@@ -77,12 +80,12 @@
     </script>
 </head>
 <body>
-<h1>
-    open-coda
-</h1>
+<h5>
+    premi il bottone e aspetta (circa 5 secondi) finche non vedi un box azzurro sulla tua faccia, poi punta il cellulare verso la strada col volume a palla.
+</h5>
 <!--
 <img src="img/cat.jpg" alt="cat"/>
 -->
-<button onclick="runVideo()">run</button>
+<button onclick="runVideo()" style="height: 100px; width: 100px">crea fastidio</button>
 </body>
 </html>

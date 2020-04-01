@@ -1,8 +1,12 @@
 :local(.className) {
     position: relative;
 }
-
 :local(.className) canvas,
 :local(.className) video{
     position: absolute;
+}
+
+:local(.VideoCapture) button{
+    width: 200px;
+    height: 100px;
 }
